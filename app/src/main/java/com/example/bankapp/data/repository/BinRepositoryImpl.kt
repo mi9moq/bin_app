@@ -18,7 +18,13 @@ class BinRepositoryImpl : BinRepository {
 
     private val mapper = BinMapper()
 
-    override suspend fun loadData(): BinInfo {
-        return mapper.mapBinDtoToEntity(api.loadData())
+    override suspend fun loadData(bin: String): BinInfo? {
+        var binInfo: BinInfo? = null
+        try {
+            val response = mapper.mapBinDtoToEntity(api.loadData(bin))
+            binInfo = response
+        } catch (e: Exception) {
+        }
+        return binInfo
     }
 }

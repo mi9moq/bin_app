@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Bank App</string>
+    <string name="scheme_network">SCHEME / NETWORK</string>
+    <string name="brand">BRAND</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="type">TYPE</string>
+    <string name="prepaid">PREPAID</string>
+    <string name="country">COUNTRY</string>
+    <string name="bank">BANK</string>
+    <string name="first_numbers">Enter the first digits of a card number</string>
+    <string name="length">LENGTH</string>
+    <string name="luhn">LUHN</string>
+    <string name="coordinates">(latitude: %1$s, longitude: %2$s)</string>
 </resources>

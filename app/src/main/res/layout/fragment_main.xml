@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_bin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_bin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/first_numbers"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/first_guideline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.33"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/second_guideline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.66"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/til_bin"/>
+
+    <TextView
+        android:id="@+id/scheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/scheme_network"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"/>
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/type"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"/>
+
+    <TextView
+        android:id="@+id/bank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/bank"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_scheme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Visa"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/scheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"/>
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Debit"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/type"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"/>
+
+    <TextView
+        android:id="@+id/tv_bank_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Jyske Bank"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/bank"
+        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_bank_url"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="www.jyskebank.dk"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_bank_name"
+        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_bank_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="+4589893300"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_bank_url"
+        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_bank_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="Hjørring"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_bank_phone"
+        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/brand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/brand"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_scheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"/>
+
+    <TextView
+        android:id="@+id/tv_brand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Visa/Dankort"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/brand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"/>
+
+    <TextView
+        android:id="@+id/card_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/card_number"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_brand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"/>
+
+    <TextView
+        android:id="@+id/len"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/length"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@id/card_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/lunh"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_len"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="16"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/len"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/lunh"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/lunh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/luhn"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"
+        app:layout_constraintTop_toBottomOf="@id/card_number"
+        app:layout_constraintStart_toEndOf="@id/len"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_lunh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="YES"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/lunh"
+        app:layout_constraintStart_toEndOf="@id/tv_len"
+        app:layout_constraintEnd_toStartOf="@id/first_guideline"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/prepaid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/prepaid"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_type"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"/>
+
+    <TextView
+        android:id="@+id/tv_prepaid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Yes"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/prepaid"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"/>
+
+    <TextView
+        android:id="@+id/country"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/country"
+        android:textSize="12sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_prepaid"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"/>
+
+    <TextView
+        android:id="@+id/tv_alpha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="RU"
+        android:textSize="10sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/country"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/tv_county_name"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_county_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="Russia"
+        android:textSize="10sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/country"
+        app:layout_constraintStart_toEndOf="@id/tv_alpha"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_coordinates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="(latitude: 56, longitude: 10)"
+        android:textSize="10sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_county_name"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"
+        tools:ignore="SmallSp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
