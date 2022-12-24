@@ -3,9 +3,11 @@ package com.example.bankapp.data.mapper
 import com.example.bankapp.data.network.BankDto
 import com.example.bankapp.data.network.BinResponse
 import com.example.bankapp.data.network.CountryDto
+import com.example.bankapp.data.network.NumberDto
 import com.example.bankapp.domain.entity.Bank
 import com.example.bankapp.domain.entity.BinInfo
 import com.example.bankapp.domain.entity.Country
+import com.example.bankapp.domain.entity.Number
 
 class BinMapper {
 
@@ -17,6 +19,11 @@ class BinMapper {
             city = it.city
         )
     }
+
+    private fun mapNumberDtoToEntity(number: NumberDto) = Number(
+        length = number.length,
+        luhn = number.luhn
+    )
 
     private fun mapCountryDtoToEntity(country: CountryDto?) = country?.let {
         Country(
@@ -31,7 +38,7 @@ class BinMapper {
     }
 
     fun mapBinDtoToEntity(bin: BinResponse) = BinInfo(
-        number = bin.number,
+        number = mapNumberDtoToEntity(bin.number),
         scheme = bin.scheme,
         type = bin.type,
         brand = bin.brand,

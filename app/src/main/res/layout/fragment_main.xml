@@ -9,6 +9,8 @@
         android:id="@+id/til_bin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:endIconMode="clear_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,9 +23,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:maxLength="12"
             android:hint="@string/first_numbers"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/bt_load_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        android:text="@string/load_data"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/first_guideline"
@@ -48,7 +61,7 @@
         android:gravity="center"
         android:layout_marginTop="8dp"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintTop_toBottomOf="@id/bt_load_data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/first_guideline"/>
 
@@ -60,7 +73,7 @@
         android:text="@string/type"
         android:textSize="12sp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintTop_toBottomOf="@id/bt_load_data"
         app:layout_constraintStart_toEndOf="@id/first_guideline"
         app:layout_constraintEnd_toStartOf="@id/second_guideline"/>
 
@@ -72,7 +85,7 @@
         android:text="@string/bank"
         android:textSize="12sp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/til_bin"
+        app:layout_constraintTop_toBottomOf="@id/bt_load_data"
         app:layout_constraintStart_toEndOf="@id/second_guideline"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -121,6 +134,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         tools:text="www.jyskebank.dk"
+        android:linksClickable="true"
+        android:autoLink="web"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:gravity="center"
@@ -134,14 +149,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        tools:text="+4589893300"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="12sp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tv_bank_url"
-        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        android:autoLink="phone"
+        android:linksClickable="true"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/second_guideline"
+        app:layout_constraintTop_toBottomOf="@id/tv_bank_url"
+        tools:text="+4589893300" />
 
     <TextView
         android:id="@+id/tv_bank_city"
@@ -293,6 +310,7 @@
         tools:text="RU"
         android:textSize="10sp"
         android:gravity="center"
+        android:layout_marginStart="8dp"
         app:layout_constraintTop_toBottomOf="@id/country"
         app:layout_constraintStart_toEndOf="@id/first_guideline"
         app:layout_constraintEnd_toStartOf="@id/tv_county_name"
@@ -323,6 +341,7 @@
         app:layout_constraintStart_toEndOf="@id/first_guideline"
         app:layout_constraintEnd_toStartOf="@id/second_guideline"
         tools:ignore="SmallSp" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
