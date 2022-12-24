@@ -1,5 +1,6 @@
 package com.example.bankapp.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.text.util.Linkify
 import android.view.LayoutInflater
@@ -15,14 +16,28 @@ import com.example.bankapp.R
 import com.example.bankapp.databinding.FragmentMainBinding
 import com.example.bankapp.domain.entity.BinInfo
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
+
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
         get() = _binding ?: throw RuntimeException("FragmentMainBinding == null")
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+        ViewModelProvider(this,viewModelFactory)[MainViewModel::class.java]
+    }
+
+    private val component by lazy{
+        (requireActivity().application as BinApplication).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

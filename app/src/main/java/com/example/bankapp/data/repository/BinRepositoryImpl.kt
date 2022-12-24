@@ -4,19 +4,13 @@ import com.example.bankapp.data.mapper.BinMapper
 import com.example.bankapp.data.network.BinApi
 import com.example.bankapp.domain.entity.BinInfo
 import com.example.bankapp.domain.repository.BinRepository
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-private const val BASE_URL = "https://lookup.binlist.net/"
 
-class BinRepositoryImpl : BinRepository {
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    private val api = retrofit.create(BinApi::class.java)
-
-    private val mapper = BinMapper()
+class BinRepositoryImpl @Inject constructor(
+    private val mapper: BinMapper,
+    private val api: BinApi
+): BinRepository {
 
     override suspend fun loadData(bin: String): BinInfo? {
         var binInfo: BinInfo? = null

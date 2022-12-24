@@ -1,15 +1,16 @@
 package com.example.bankapp.data.mapper
 
-import com.example.bankapp.data.network.BankDto
-import com.example.bankapp.data.network.BinResponse
-import com.example.bankapp.data.network.CountryDto
-import com.example.bankapp.data.network.NumberDto
+import com.example.bankapp.data.network.model.BankDto
+import com.example.bankapp.data.network.model.BinResponse
+import com.example.bankapp.data.network.model.CountryDto
+import com.example.bankapp.data.network.model.NumberDto
 import com.example.bankapp.domain.entity.Bank
 import com.example.bankapp.domain.entity.BinInfo
 import com.example.bankapp.domain.entity.Country
 import com.example.bankapp.domain.entity.Number
+import javax.inject.Inject
 
-class BinMapper {
+class BinMapper @Inject constructor() {
 
     private fun mapBankDtoToEntity(bank: BankDto?) = bank?.let {
         Bank(
