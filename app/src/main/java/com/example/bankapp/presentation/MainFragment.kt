@@ -57,6 +57,7 @@ class MainFragment : Fragment() {
         binding.tilBin.setEndIconOnClickListener {
             binding.etBin.text?.clear()
             viewModel.loadCardInfo(null)
+            //setupDefaultViews()
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
@@ -70,19 +71,7 @@ class MainFragment : Fragment() {
     private fun setupViews(bin: BinInfo?){
         with(binding){
             if(bin == null){
-                setupDefault(tvScheme)
-                setupDefault(tvBrand)
-                setupDefault(tvLen)
-                setupDefault(tvLunh)
-                setupDefault(tvType)
-                setupDefault(tvPrepaid)
-                setupDefault(tvAlpha)
-                setupDefault(tvCountyName)
-                setupDefault(tvCoordinates)
-                setupDefault(tvBankName)
-                setupDefault(tvBankUrl)
-                setupDefault(tvBankPhone)
-                setupDefault(tvBankCity)
+                setupDefaultViews()
             }else{
                 bin.let {
                     tvScheme.text = it.scheme
@@ -115,6 +104,24 @@ class MainFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupDefaultViews(){
+        with(binding){
+            setupDefault(tvScheme)
+            setupDefault(tvBrand)
+            setupDefault(tvLen)
+            setupDefault(tvLunh)
+            setupDefault(tvType)
+            setupDefault(tvPrepaid)
+            setupDefault(tvAlpha)
+            setupDefault(tvCountyName)
+            setupDefault(tvCoordinates)
+            setupDefault(tvBankName)
+            setupDefault(tvBankUrl)
+            setupDefault(tvBankPhone)
+            setupDefault(tvBankCity)
         }
     }
 
