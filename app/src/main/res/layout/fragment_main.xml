@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout"
+        android:id="@+id/til_bin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_clean"
@@ -19,36 +19,15 @@
         android:layout_marginTop="20dp">
 
         <AutoCompleteTextView
-            android:id="@+id/AutoCompleteTextView"
+            android:id="@+id/ac_bin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLength="12"
+            android:inputType="number"
             android:hint="@string/first_numbers" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_bin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:endIconMode="clear_text"
-        app:layout_constraintTop_toBottomOf="@id/TextInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_bin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLength="12"
-            android:hint="@string/first_numbers"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/bt_load_data"

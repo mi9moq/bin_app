@@ -21,8 +21,8 @@ class MainViewModel @Inject constructor(
     val errorInputBin: StateFlow<Boolean>
         get() = _errorInputBin
 
-    private val _binArray: MutableStateFlow<Array<String>> = MutableStateFlow(emptyArray())
-    val binList: StateFlow<Array<String>>
+    private val _binArray: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
+    val binList: StateFlow<Set<String>>
         get() = _binArray
 
     fun loadCardInfo(inputBin: String?) {

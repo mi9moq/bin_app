@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -58,10 +57,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btLoadData.setOnClickListener {
-            viewModel.loadCardInfo(binding.etBin.text.toString())
+            viewModel.loadCardInfo(binding.acBin.text.toString())
         }
         binding.tilBin.setEndIconOnClickListener {
-            binding.etBin.text?.clear()
+            binding.acBin.text?.clear()
             viewModel.loadCardInfo(null)
             //setupDefaultViews()
         }
@@ -80,9 +79,9 @@ class MainFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.binList.collect{
-                    bins = it
+                    bins = it.toTypedArray()
                     val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,bins)
-                    binding.AutoCompleteTextView.setAdapter(arrayAdapter)
+                    binding.acBin.setAdapter(arrayAdapter)
                 }
             }
         }
@@ -140,7 +139,7 @@ class MainFragment : Fragment() {
     }
 
     private fun addTextChangeListener(){
-        binding.etBin.addTextChangedListener(object : TextWatcher{
+        binding.acBin.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -150,7 +149,6 @@ class MainFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
             }
-
         })
     }
 
