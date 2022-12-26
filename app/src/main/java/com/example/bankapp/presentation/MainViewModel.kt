@@ -17,17 +17,37 @@ class MainViewModel @Inject constructor(
     val cardInfo: StateFlow<BinInfo?>
         get() = _cardInfo
 
-    private val _binList: MutableStateFlow<Array<String>> = MutableStateFlow(emptyArray())
+    private val _errorInputBin: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val errorInputBin: StateFlow<Boolean>
+        get() = _errorInputBin
+
+    private val _binArray: MutableStateFlow<Array<String>> = MutableStateFlow(emptyArray())
     val binList: StateFlow<Array<String>>
-        get() = _binList
+        get() = _binArray
 
     fun loadCardInfo(inputBin: String?) {
         val bin = parseInput(inputBin)
-        viewModelScope.launch {
-            _cardInfo.value = loadDataUseCase.loadData(bin)
-            _binList.value += bin
+        val fieldsValid = validateInput(bin)
+        if (fieldsValid) {
+            viewModelScope.launch {
+                _cardInfo.value = loadDataUseCase.loadData(bin)
+                _binArray.value += bin
+            }
         }
     }
 
     private fun parseInput(input: String?) = input?.trim() ?: ""
+
+    private fun validateInput(bin: String): Boolean {
+        var result = true
+        if (bin.isBlank()) {
+            _errorInputBin.value = true
+            result = false
+        }
+        return result
+    }
+
+    fun resetErrorInput() {
+        _errorInputBin.value = false
+    }
 }

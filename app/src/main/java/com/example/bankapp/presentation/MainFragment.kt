@@ -2,12 +2,15 @@ package com.example.bankapp.presentation
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -62,7 +65,11 @@ class MainFragment : Fragment() {
             viewModel.loadCardInfo(null)
             //setupDefaultViews()
         }
+        addTextChangeListener()
+        observeViewModel()
+    }
 
+    private fun observeViewModel(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.cardInfo.collect {
@@ -79,7 +86,18 @@ class MainFragment : Fragment() {
                 }
             }
         }
-
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.errorInputBin.collect{
+                    val message = if(it){
+                        getString(R.string.error_input_bin)
+                    }else{
+                        null
+                    }
+                    binding.tilBin.error = message
+                }
+            }
+        }
     }
 
     private fun setupViews(bin: BinInfo?){
@@ -119,6 +137,21 @@ class MainFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun addTextChangeListener(){
+        binding.etBin.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.resetErrorInput()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
     }
 
     private fun setupDefaultViews(){
