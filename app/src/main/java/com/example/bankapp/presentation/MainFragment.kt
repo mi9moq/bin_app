@@ -6,6 +6,7 @@ import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -19,6 +20,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
+
+    private var bins: Array<String> = emptyArray()
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
@@ -52,13 +55,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btLoadData.setOnClickListener {
-            viewModel.loadCardInfo(binding.etBin.text?.toString())
+            viewModel.loadCardInfo(binding.etBin.text.toString())
         }
         binding.tilBin.setEndIconOnClickListener {
             binding.etBin.text?.clear()
             viewModel.loadCardInfo(null)
             //setupDefaultViews()
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.cardInfo.collect {
@@ -66,6 +70,16 @@ class MainFragment : Fragment() {
                 }
             }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.binList.collect{
+                    bins = it
+                    val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,bins)
+                    binding.AutoCompleteTextView.setAdapter(arrayAdapter)
+                }
+            }
+        }
+
     }
 
     private fun setupViews(bin: BinInfo?){
@@ -126,7 +140,7 @@ class MainFragment : Fragment() {
     }
 
     private fun setupDefault(textView: TextView){
-        textView.text = QUESTION
+        textView.text = DEFAULT_VALUE
     }
 
     override fun onDestroyView() {
@@ -135,6 +149,6 @@ class MainFragment : Fragment() {
     }
 
     companion object{
-        private const val QUESTION = "?"
+        private const val DEFAULT_VALUE = "?"
     }
 }
