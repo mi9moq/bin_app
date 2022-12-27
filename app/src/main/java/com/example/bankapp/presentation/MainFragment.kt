@@ -33,10 +33,10 @@ class MainFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel by lazy {
-        ViewModelProvider(this,viewModelFactory)[MainViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 
-    private val component by lazy{
+    private val component by lazy {
         (requireActivity().application as BinApplication).component
     }
 
@@ -68,29 +68,25 @@ class MainFragment : Fragment() {
         observeViewModel()
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.cardInfo.collect {
                     setupViews(it)
                 }
             }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.binList.collect{
+                viewModel.binList.collect {
                     bins = it.toTypedArray()
-                    val arrayAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item,bins)
+                    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, bins)
                     binding.acBin.setAdapter(arrayAdapter)
                 }
             }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.errorInputBin.collect{
-                    val message = if(it){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.errorInputBin.collect {
+                    val message = if (it) {
                         getString(R.string.error_input_bin)
-                    }else{
+                    } else {
                         null
                     }
                     binding.tilBin.error = message
@@ -99,11 +95,11 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setupViews(bin: BinInfo?){
-        with(binding){
-            if(bin == null){
+    private fun setupViews(bin: BinInfo?) {
+        with(binding) {
+            if (bin == null) {
                 setupDefaultViews()
-            }else{
+            } else {
                 bin.let {
                     tvScheme.text = it.scheme
                     tvType.text = it.type
@@ -111,7 +107,7 @@ class MainFragment : Fragment() {
                     tvPrepaid.text = if (it.prepaid != null && it.prepaid) "Yes" else "No"
                     tvLen.text = it.number.length.toString()
                     tvLunh.text = if (it.number.luhn) "Yes" else "No"
-                    if(it.country != null){
+                    if (it.country != null) {
                         tvAlpha.text = it.country.alphaTwo
                         tvCountyName.text = it.country.name
                         tvCoordinates.text = getString(
@@ -138,8 +134,8 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun addTextChangeListener(){
-        binding.acBin.addTextChangedListener(object : TextWatcher{
+    private fun addTextChangeListener() {
+        binding.acBin.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -152,8 +148,8 @@ class MainFragment : Fragment() {
         })
     }
 
-    private fun setupDefaultViews(){
-        with(binding){
+    private fun setupDefaultViews() {
+        with(binding) {
             setupDefault(tvScheme)
             setupDefault(tvBrand)
             setupDefault(tvLen)
@@ -170,7 +166,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setupDefault(textView: TextView){
+    private fun setupDefault(textView: TextView) {
         textView.text = DEFAULT_VALUE
     }
 
@@ -179,7 +175,7 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    companion object{
+    companion object {
         private const val DEFAULT_VALUE = "?"
     }
 }

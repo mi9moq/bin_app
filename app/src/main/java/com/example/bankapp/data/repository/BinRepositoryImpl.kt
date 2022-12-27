@@ -14,11 +14,13 @@ class BinRepositoryImpl @Inject constructor(
 
     override suspend fun loadData(bin: String): BinInfo? {
         var binInfo: BinInfo? = null
+
         try {
             val response = mapper.mapBinDtoToEntity(api.loadData(bin))
             binInfo = response
         } catch (e: Exception) {
         }
+
         return binInfo
     }
 }

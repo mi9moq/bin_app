@@ -6,7 +6,7 @@ import com.example.bankapp.R
 
 class MainActivity : AppCompatActivity() {
 
-    private val component by lazy{(application as BinApplication).component}
+    private val component by lazy { (application as BinApplication).component }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
