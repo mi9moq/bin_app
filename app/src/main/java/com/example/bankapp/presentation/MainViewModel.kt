@@ -2,7 +2,7 @@ package com.example.bankapp.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bankapp.domain.entity.BinInfo
+import com.example.bankapp.domain.entity.CardInfo
 import com.example.bankapp.domain.usecase.LoadDataUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,8 +13,8 @@ class MainViewModel @Inject constructor(
     private val loadDataUseCase: LoadDataUseCase
 ) : ViewModel() {
 
-    private val _cardInfo: MutableStateFlow<BinInfo?> = MutableStateFlow(null)
-    val cardInfo: StateFlow<BinInfo?>
+    private val _cardInfo: MutableStateFlow<CardInfo?> = MutableStateFlow(null)
+    val cardInfo: StateFlow<CardInfo?>
         get() = _cardInfo
 
     private val _errorInputBin: MutableStateFlow<Boolean> = MutableStateFlow(false)

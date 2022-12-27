@@ -1,11 +1,11 @@
 package com.example.bankapp.data.mapper
 
 import com.example.bankapp.data.network.model.BankDto
-import com.example.bankapp.data.network.model.BinResponse
+import com.example.bankapp.data.network.model.CardInfoDto
 import com.example.bankapp.data.network.model.CountryDto
 import com.example.bankapp.data.network.model.NumberDto
 import com.example.bankapp.domain.entity.Bank
-import com.example.bankapp.domain.entity.BinInfo
+import com.example.bankapp.domain.entity.CardInfo
 import com.example.bankapp.domain.entity.Country
 import com.example.bankapp.domain.entity.Number
 import javax.inject.Inject
@@ -38,7 +38,7 @@ class BinMapper @Inject constructor() {
         )
     }
 
-    fun mapBinDtoToEntity(bin: BinResponse) = BinInfo(
+    fun mapBinDtoToEntity(bin: CardInfoDto) = CardInfo(
         number = mapNumberDtoToEntity(bin.number),
         scheme = bin.scheme,
         type = bin.type,

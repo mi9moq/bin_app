@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.bankapp.R
 import com.example.bankapp.databinding.FragmentMainBinding
-import com.example.bankapp.domain.entity.BinInfo
+import com.example.bankapp.domain.entity.CardInfo
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -95,7 +95,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setupViews(bin: BinInfo?) {
+    private fun setupViews(bin: CardInfo?) {
         with(binding) {
             if (bin == null) {
                 setupDefaultViews()
