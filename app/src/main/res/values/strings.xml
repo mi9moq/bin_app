@@ -12,5 +12,6 @@
     <string name="luhn">LUHN</string>
     <string name="load_data">Load Data</string>
     <string name="error_input_bin">Empty Input</string>
-    <string name="coordinates">(latitude: %1$s, longitude: %2$s)</string>
+    <string name="currency">Currency: %s</string>
+    <string name="county_coordinates">(latitude: %1$s, longitude: %2$s)</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,40 +93,20 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setupViews(bin: CardInfo?) {
+    private fun setupViews(cardInfo: CardInfo?) {
         with(binding) {
-            if (bin == null) {
+            if (cardInfo == null) {
                 setupDefaultViews()
             } else {
-                bin.let {
+                cardInfo.let {
                     tvScheme.text = it.scheme
                     tvType.text = it.type
                     tvBrand.text = it.brand
                     tvPrepaid.text = if (it.prepaid != null && it.prepaid) "Yes" else "No"
                     tvLen.text = it.number.length.toString()
                     tvLunh.text = if (it.number.luhn) "Yes" else "No"
-                    if (it.country != null) {
-                        tvAlpha.text = it.country.alphaTwo
-                        tvCountyName.text = it.country.name
-                        tvCoordinates.text = getString(
-                            R.string.coordinates,
-                            it.country.latitude.toString(),
-                            it.country.longitude.toString()
-                        )
-                    }
-                    it.bank?.let { bank ->
-                        tvBankName.text = bank.name
-                        tvBankUrl.apply {
-                            text = bank.url
-                            linksClickable = true
-                            autoLinkMask = Linkify.WEB_URLS
-                        }
-                        tvBankPhone.apply {
-                            text = bank.phone
-                            autoLinkMask = Linkify.PHONE_NUMBERS
-                        }
-                        tvBankCity.text = bank.city
-                    }
+                    setupCountry(it)
+                    setupBank(it)
                 }
             }
         }
@@ -147,6 +126,56 @@ class MainFragment : Fragment() {
         })
     }
 
+    private fun setupCountry(cardInfo: CardInfo) {
+        with(binding) {
+            if (cardInfo.country != null) {
+                cardInfo.country.let {
+                    tvAlpha.text = it.alphaTwo
+                    tvCountyName.text = it.name
+                    tvCoordinates.text = getString(
+                        R.string.county_coordinates,
+                        it.latitude.toString(),
+                        it.longitude.toString()
+                    )
+                    tvCurrency.text = getString(
+                        R.string.currency,
+                        it.currency
+                    )
+                }
+            } else {
+                setupDefault(tvAlpha)
+                setupDefault(tvCountyName)
+                tvCoordinates.text = getString(
+                    R.string.county_coordinates,
+                    DEFAULT_VALUE,
+                    DEFAULT_VALUE
+                )
+                tvCurrency.text = getString(
+                    R.string.currency,
+                    DEFAULT_VALUE
+                )
+            }
+        }
+    }
+
+    private fun setupBank(cardInfo: CardInfo) {
+        with(binding) {
+            if (cardInfo.bank != null) {
+                cardInfo.bank.let {
+                    tvBankName.text = it.name
+                    tvBankUrl.text = it.url
+                    tvBankPhone.text = it.phone ?: DEFAULT_VALUE
+                    tvBankCity.text = it.city ?: DEFAULT_VALUE
+                }
+            } else {
+                setupDefault(tvBankName)
+                setupDefault(tvBankUrl)
+                setupDefault(tvBankPhone)
+                setupDefault(tvBankCity)
+            }
+        }
+    }
+
     private fun setupDefaultViews() {
         with(binding) {
             setupDefault(tvScheme)
@@ -157,11 +186,19 @@ class MainFragment : Fragment() {
             setupDefault(tvPrepaid)
             setupDefault(tvAlpha)
             setupDefault(tvCountyName)
-            setupDefault(tvCoordinates)
             setupDefault(tvBankName)
             setupDefault(tvBankUrl)
             setupDefault(tvBankPhone)
             setupDefault(tvBankCity)
+            tvCurrency.text = getString(
+                R.string.currency,
+                DEFAULT_VALUE
+            )
+            tvCoordinates.text = getString(
+                R.string.county_coordinates,
+                DEFAULT_VALUE,
+                DEFAULT_VALUE
+            )
         }
     }
 
