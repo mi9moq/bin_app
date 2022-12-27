@@ -1,6 +1,8 @@
 package com.example.bankapp.presentation
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -132,6 +134,7 @@ class MainFragment : Fragment() {
                 cardInfo.country.let {
                     tvAlpha.text = it.alphaTwo
                     tvCountyName.text = it.name
+                    tvCountyNumeric.text = it.numeric
                     tvCoordinates.text = getString(
                         R.string.county_coordinates,
                         it.latitude.toString(),
@@ -141,10 +144,12 @@ class MainFragment : Fragment() {
                         R.string.currency,
                         it.currency
                     )
+                    parseCoordinates(cardInfo)
                 }
             } else {
                 setupDefault(tvAlpha)
                 setupDefault(tvCountyName)
+                setupDefault(tvCountyNumeric)
                 tvCoordinates.text = getString(
                     R.string.county_coordinates,
                     DEFAULT_VALUE,
@@ -176,6 +181,16 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun parseCoordinates(cardInfo: CardInfo){
+        binding.tvCoordinates.setOnClickListener {
+            val coordinates = "geo:${cardInfo.country?.latitude},${cardInfo.country?.longitude}"
+            val gmmIntentUri = Uri.parse(coordinates)
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        }
+    }
+
     private fun setupDefaultViews() {
         with(binding) {
             setupDefault(tvScheme)
@@ -186,6 +201,7 @@ class MainFragment : Fragment() {
             setupDefault(tvPrepaid)
             setupDefault(tvAlpha)
             setupDefault(tvCountyName)
+            setupDefault(tvCountyNumeric)
             setupDefault(tvBankName)
             setupDefault(tvBankUrl)
             setupDefault(tvBankPhone)

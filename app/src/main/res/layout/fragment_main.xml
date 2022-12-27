@@ -270,14 +270,26 @@
 
     <TextView
         android:id="@+id/tv_alpha"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/SecondTextViewStyle"
         tools:text="RU"
         android:layout_marginStart="8dp"
         app:layout_constraintTop_toBottomOf="@id/country"
         app:layout_constraintStart_toEndOf="@id/first_guideline"
-        app:layout_constraintEnd_toStartOf="@id/tv_county_name"
+        app:layout_constraintEnd_toStartOf="@id/tv_county_numeric"
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:id="@+id/tv_county_numeric"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/SecondTextViewStyle"
+        tools:text="204"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/country"
+        app:layout_constraintStart_toEndOf="@id/tv_alpha"
+        app:layout_constraintEnd_toStartOf="@id/second_guideline"
         tools:ignore="SmallSp" />
 
     <TextView
@@ -286,8 +298,8 @@
         android:layout_height="wrap_content"
         style="@style/SecondTextViewStyle"
         tools:text="Russia"
-        app:layout_constraintTop_toBottomOf="@id/country"
-        app:layout_constraintStart_toEndOf="@id/tv_alpha"
+        app:layout_constraintTop_toBottomOf="@id/tv_county_numeric"
+        app:layout_constraintStart_toEndOf="@id/first_guideline"
         app:layout_constraintEnd_toStartOf="@id/second_guideline"
         tools:ignore="SmallSp" />
 
