@@ -1,5 +1,8 @@
 package com.example.bankapp.di
 
+import android.app.Application
+import com.example.bankapp.data.database.BinDatabase
+import com.example.bankapp.data.database.BinListDao
 import com.example.bankapp.data.network.ApiFactory
 import com.example.bankapp.data.network.BinApi
 import com.example.bankapp.data.repository.BinRepositoryImpl
@@ -20,6 +23,12 @@ interface DataModule {
         @ApplicationScope
         fun provideBinApi(): BinApi{
             return ApiFactory.api
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideBinListDao(application: Application): BinListDao{
+            return BinDatabase.getInstance(application).binListDao()
         }
     }
 }
