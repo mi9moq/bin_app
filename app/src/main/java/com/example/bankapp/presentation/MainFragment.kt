@@ -59,11 +59,6 @@ class MainFragment : Fragment() {
         binding.btLoadData.setOnClickListener {
             viewModel.loadCardInfo(binding.acBin.text.toString())
         }
-        binding.tilBin.setEndIconOnClickListener {
-            binding.acBin.text?.clear()
-            viewModel.loadCardInfo(null)
-            //setupDefaultViews()
-        }
         addTextChangeListener()
         observeViewModel()
     }
@@ -75,13 +70,8 @@ class MainFragment : Fragment() {
                     setupViews(it)
                 }
             }
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.binList.collect {
-                    bins = it.toTypedArray()
-                    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, bins)
-                    binding.acBin.setAdapter(arrayAdapter)
-                }
-            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.errorInputBin.collect {
                     val message = if (it) {
@@ -90,6 +80,15 @@ class MainFragment : Fragment() {
                         null
                     }
                     binding.tilBin.error = message
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.binSet.collect {
+                    bins = it.toTypedArray()
+                    val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, bins)
+                    binding.acBin.setAdapter(arrayAdapter)
                 }
             }
         }

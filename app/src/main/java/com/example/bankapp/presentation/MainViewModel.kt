@@ -1,5 +1,6 @@
 package com.example.bankapp.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bankapp.domain.entity.CardInfo
@@ -22,7 +23,7 @@ class MainViewModel @Inject constructor(
         get() = _errorInputBin
 
     private val _binArray: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
-    val binList: StateFlow<Set<String>>
+    val binSet: StateFlow<Set<String>>
         get() = _binArray
 
     fun loadCardInfo(inputBin: String?) {
@@ -31,7 +32,9 @@ class MainViewModel @Inject constructor(
         if (fieldsValid) {
             viewModelScope.launch {
                 _cardInfo.value = loadDataUseCase.loadData(bin)
+                Log.d("ViewModel",bin)
                 _binArray.value += bin
+                Log.d("ViewModel",binSet.value.toString())
             }
         }
     }

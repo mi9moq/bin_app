@@ -2,11 +2,10 @@ package com.example.bankapp.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import javax.inject.Inject
 
 @Entity(tableName = "bin_items")
-data class BinDbModel @Inject constructor(
+data class BinDbModel(
     @PrimaryKey(autoGenerate = true)
-    val id : UByte,
+    val id : Int,
     val bin: String
 )
