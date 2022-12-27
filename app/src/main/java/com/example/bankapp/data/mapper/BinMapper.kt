@@ -1,15 +1,15 @@
 package com.example.bankapp.data.mapper
 
-import com.example.bankapp.data.network.BankDto
-import com.example.bankapp.data.network.BinResponse
-import com.example.bankapp.data.network.CountryDto
-import com.example.bankapp.data.network.NumberDto
-import com.example.bankapp.domain.entity.Bank
-import com.example.bankapp.domain.entity.BinInfo
-import com.example.bankapp.domain.entity.Country
+import com.example.bankapp.data.database.BinDbModel
+import com.example.bankapp.data.network.model.BankDto
+import com.example.bankapp.data.network.model.CardInfoDto
+import com.example.bankapp.data.network.model.CountryDto
+import com.example.bankapp.data.network.model.NumberDto
+import com.example.bankapp.domain.entity.*
 import com.example.bankapp.domain.entity.Number
+import javax.inject.Inject
 
-class BinMapper {
+class BinMapper @Inject constructor() {
 
     private fun mapBankDtoToEntity(bank: BankDto?) = bank?.let {
         Bank(
@@ -37,13 +37,27 @@ class BinMapper {
         )
     }
 
-    fun mapBinDtoToEntity(bin: BinResponse) = BinInfo(
-        number = mapNumberDtoToEntity(bin.number),
-        scheme = bin.scheme,
-        type = bin.type,
-        brand = bin.brand,
-        prepaid = bin.prepaid,
-        country = mapCountryDtoToEntity(bin.country),
-        bank = mapBankDtoToEntity(bin.bank)
+    fun mapCardInfoDtoToEntity(cardInfo: CardInfoDto) = CardInfo(
+        number = mapNumberDtoToEntity(cardInfo.number),
+        scheme = cardInfo.scheme,
+        type = cardInfo.type,
+        brand = cardInfo.brand,
+        prepaid = cardInfo.prepaid,
+        country = mapCountryDtoToEntity(cardInfo.country),
+        bank = mapBankDtoToEntity(cardInfo.bank)
     )
+
+    fun mapBinEntityToBinDbModel(info: BinInfo) = BinDbModel(
+        id = info.id,
+        bin = info.bin
+    )
+
+    private fun mapBinDbModelToEntity(info:BinDbModel) = BinInfo(
+        id = info.id,
+        bin = info.bin
+    )
+
+    fun mapBindDbModelListToListEntity(list: List<BinDbModel>) = list.map {
+        mapBinDbModelToEntity(it)
+    }
 }

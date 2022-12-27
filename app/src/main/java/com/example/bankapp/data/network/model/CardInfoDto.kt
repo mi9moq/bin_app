@@ -1,6 +1,6 @@
-package com.example.bankapp.data.network
+package com.example.bankapp.data.network.model
 
-data class BinResponse(
+data class CardInfoDto(
     val number: NumberDto,
     val scheme: String,
     val type: String?,

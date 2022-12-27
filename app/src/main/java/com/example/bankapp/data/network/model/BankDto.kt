@@ -1,4 +1,4 @@
-package com.example.bankapp.data.network
+package com.example.bankapp.data.network.model
 
 data class BankDto(
     val name: String,
