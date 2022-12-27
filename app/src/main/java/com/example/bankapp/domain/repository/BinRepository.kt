@@ -9,5 +9,5 @@ interface BinRepository {
 
     suspend fun saveBinRequest(bin: BinInfo)
 
-    fun getBinList():Flow<List<BinInfo>>
+    fun getBinList():Flow<Set<BinInfo>>
 }

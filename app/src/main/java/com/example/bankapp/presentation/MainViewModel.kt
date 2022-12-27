@@ -1,17 +1,21 @@
 package com.example.bankapp.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bankapp.domain.entity.BinInfo
 import com.example.bankapp.domain.entity.CardInfo
+import com.example.bankapp.domain.usecase.GetBinListUseCase
 import com.example.bankapp.domain.usecase.LoadDataUseCase
+import com.example.bankapp.domain.usecase.SaveBinUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val loadDataUseCase: LoadDataUseCase
+    private val loadDataUseCase: LoadDataUseCase,
+    private val saveBinUseCase: SaveBinUseCase,
+    private val getBinListUseCase: GetBinListUseCase
 ) : ViewModel() {
 
     private val _cardInfo: MutableStateFlow<CardInfo?> = MutableStateFlow(null)
@@ -22,9 +26,19 @@ class MainViewModel @Inject constructor(
     val errorInputBin: StateFlow<Boolean>
         get() = _errorInputBin
 
-    private val _binArray: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
+    private val _binSet: MutableStateFlow<Set<String>> = MutableStateFlow(emptySet())
     val binSet: StateFlow<Set<String>>
-        get() = _binArray
+        get() = _binSet
+
+    init {
+        viewModelScope.launch {
+            getBinListUseCase.getBinList().collect{set->
+                set.map {
+                    _binSet.value+=it.bin
+                }
+            }
+        }
+    }
 
     fun loadCardInfo(inputBin: String?) {
         val bin = parseInput(inputBin)
@@ -32,9 +46,8 @@ class MainViewModel @Inject constructor(
         if (fieldsValid) {
             viewModelScope.launch {
                 _cardInfo.value = loadDataUseCase.loadData(bin)
-                Log.d("ViewModel",bin)
-                _binArray.value += bin
-                Log.d("ViewModel",binSet.value.toString())
+                val binInfo = BinInfo(bin = bin)
+                saveBinUseCase.saveBin(binInfo)
             }
         }
     }
